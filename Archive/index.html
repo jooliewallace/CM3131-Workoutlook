@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Google Maps API Example</title>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<ion-header>
+    <ion-toolbar id="toolbar" color="primary">
+        <ion-title>WORK-OUT-LOOK</ion-title>
+        <div><ion-toolbar-content id="temperature" slot=""></ion-toolbar-content></div>
+        <div><ion-toolbar-content id="description" slot=""></ion-toolbar-content></div>
+        <img id="icon" slot="end" src="" alt="weathericon">
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card>
+
+        <ion-card-content>
+
+            <h2 class="page-title">Planning</h2>
+            <p>Work-out-look is an activity planning app where you can plan your
+                workouts according to the weather. When you have selected the date and
+                time that you would like to run or paddle, select a route and the app will
+                show you the weather forecast for that location.
+            </p>
+            <h2>Select an activity from below:</h2>
+            <!-- the two images -->
+            <ion-row>
+                <ion-col class="ion-align-self-end">
+                    <ion-card>
+                        <ion-img src="./Images/Run.jpeg"></ion-img>
+                    </ion-card>
+                </ion-col>
+                <ion-col class="ion-align-self-start">
+                    <ion-card>
+                        <ion-img src="./Images/Paddle.jpeg"></ion-img>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+
+            <h2>Select a date and time:</h2>
+
+                <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+                <ion-modal>
+                    <ion-datetime id="datetime"></ion-datetime>
+                </ion-modal>
+
+                <h2>Plan your route:</h2>
+
+                <div id="map"></div>
+
+                <h2>Your Work-Out-Look</h2>
+                <div><span id="weather"></span></div>
+                <div>Total Distance: <span id="distance">0.00</span> km</div>
+
+                <div>
+                    <label for="route-name">Route name:</label>
+                    <input type="text" id="route-name">
+                    <ion-button onclick="clearRoute()">Clear Route</ion-button>
+                </div>
+
+                <div>
+                    <ion-button expand="block" onclick="saveRoute()">+ Add to Plan<ion/button>
+                </div>
+
+                <script async
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV1DfvaQczVj43_srRMHyZaxClqJRApU0&callback=initMap"
+                    async defer></script>
+
+            </body>
+
+        </ion-card-content>
+
+    </ion-card>
+
+</ion-content>
+
+<ion-router>
+    <ion-route url="/" component="index"></ion-route>
+    <ion-route url="/profile" component="profile"></ion-route>
+    <ion-route url="/settings" component="settings"></ion-route>
+    <ion-route url="/runningplan" component="runningplan"></ion-route>
+  </ion-router>
+  
+  <ion-tabs>
+    <!-- Tab views -->
+    <ion-tab tab="home">
+      <ion-router-outlet name="home"></ion-router-outlet>
+    </ion-tab>
+  
+    <ion-tab tab="profile">
+      <ion-router-outlet name="profile"></ion-router-outlet>
+    </ion-tab>
+  
+    <ion-tab tab="settings">
+      <ion-router-outlet name="settings"></ion-router-outlet>
+    </ion-tab>
+  
+    <ion-tab tab="runningplan">
+      <ion-router-outlet name="runningplan"></ion-router-outlet>
+    </ion-tab>
+  
+    <!-- Tab bar -->
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home" href="/">
+        <ion-icon name="home-outline" aria-hidden="true"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="profile" href="/profile">
+        <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+        <ion-label>Profile</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="settings" href="/settings">
+        <ion-icon name="settings-outline" aria-hidden="true"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="runningplan" href="/runningplan">
+        <ion-icon name="fitness-outline" aria-hidden="true"></ion-icon>
+        <ion-label>Running Plan</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+    
+
+  </html>

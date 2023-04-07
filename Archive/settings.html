@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="index.js" defer></script>
+
+</head>
+
+<body>
+  <ion-header>
+    <ion-toolbar id="toolbar" color="primary">
+      <ion-title>WORK-OUT-LOOK</ion-title>
+      <div><ion-toolbar-content id="temperature" slot=""></ion-toolbar-content></div>
+      <div><ion-toolbar-content id="description" slot=""></ion-toolbar-content></div>
+      <img id="icon" slot="end" src="" alt="">
+    </ion-toolbar>
+  </ion-padding>
+  </ion-header>
+
+<ion-content>
+    <ion-card>
+      <ion-card-content>
+        <h2 class="page-title">Settings</h2>
+        
+        <ion-segment  color="primary" value="primary">
+          <ion-segment-button value="primary">
+            <ion-label>Running</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="segment">
+            <ion-label>Paddling</ion-segment-button>
+          </ion-segment-button>
+        </ion-segment>
+
+        <ion-grid>
+          <ion-row class="title-box">
+            <ion-col size="10">
+              <ion-label class="preferences">Location</ion-label>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon class="star" name="location-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-item>
+          <ion-label for="city-input">City:</ion-label>
+          <ion-input type="text" id="city-input" name="city" value="">
+        </ion-item>
+
+        
+          <ion-row class="title-box">
+            <ion-col size="10">
+              <ion-label class="preferences">Units</ion-label>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon class="star" name="help-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        
+
+        <!-- <ion-item display="flex">
+          <p>Distance</p>
+          <ion-toggle slot="end" color="primary" checked="true"></ion-toggle>
+        </ion-item> -->
+
+        <!-- <ion-item>
+          <p>Temperature</p>
+          <ion-toggle slot="end" color="primary" checked="true"></ion-toggle>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label for="units-input">Distance:</ion-label>
+          <select id="distance-unit">
+            <option value="km">Kilometers (km)</option>
+            <option value="mi">Miles (mi)</option>
+          </select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label for="units-input">Temperature:</ion-label>
+          <select id="units-input" name="units">
+            <option value="metric">Celsius</option>
+            <option value="imperial">Fahrenheit</option>
+          </select>
+        </ion-item>
+
+          <ion-row class="title-box">
+            <ion-col size="10">
+              <ion-label class="preferences">Temperature</ion-label>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon class="star" name="thermometer-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+        <ion-item>
+          <ion-label for="threshold-input">Minimum temperature</ion-label>
+          <ion-input type="number" id="minimum-temperature-input" slot="end" name="threshold" value="">
+        </ion-item>
+        <ion-item>
+          <ion-label for="threshold-input">Maximum temperature</ion-label>
+          <ion-input type="number" id="threshold-input" slot="end" name="threshold" value="">
+        </ion-item>
+
+        <ion-button id="saveButton" class="buttons" expand="block" color="primary">+ Save Changes</ion-button>
+
+
+          <!-- <ion-row class="title-box">
+            <ion-col size="10">
+              <ion-label class="preferences">Wind Speed</ion-label>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon class="star" slot="end" name="help-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row> -->
+
+      </ion-card-content>
+
+    </ion-card>
+</body>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      Footer
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+</ion-content>
+
+
+</html>

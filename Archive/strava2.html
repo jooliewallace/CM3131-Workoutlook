@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strava Activities</title>
+</head>
+<body>
+  <h1>Strava Activities</h1>
+  <div id="activities"></div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const client_id = '104297';
+    const redirect_uri = 'http://127.0.0.1:5500/profile.html'; // This needs to match your Strava application's redirect URI
+
+    const authorizeUrl = `https://www.strava.com/oauth/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=read_all`;
+
+    const accessToken = 'bf2ff9eab657f4749a7d35450d7ae82d54b8d453';
+    const apiEndpoint = 'https://www.strava.com/api/v3/athlete/activities';
+    const activitiesDiv = document.getElementById('activities');
+
+    function fetchActivities() {
+      fetch(apiEndpoint, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(activity => {
+          const activityDiv = document.createElement('div');
+          const activityName = document.createElement('h3');
+          activityName.innerText = activity.name;
+          const activityDistance = document.createElement('p');
+          activityDistance.innerText = `Distance: ${activity.distance}`;
+          activityDiv.appendChild(activityName);
+          activityDiv.appendChild(activityDistance);
+          activitiesDiv.appendChild(activityDiv);
+        });
+      })
+      .catch(error => console.error(error));
+    }
+
+    if (window.location.search.includes('code')) {
+      const code = window.location.search.split('=')[1];
+
+      axios.post('https://www.strava.com/oauth/token', {
+        client_id,
+        client_secret: '38b3d4c5eb2e9272957e87f83304bfb66aead72c',
+        code,
+        grant_type: 'authorization_code',
+      })
+      .then(response => {
+        accessToken = response.data.access_token;
+        fetchActivities();
+      })
+      .catch(error => console.error(error));
+    } else {
+      window.location.href = authorizeUrl;
+    }
+  </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

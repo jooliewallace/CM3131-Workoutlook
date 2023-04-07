@@ -1,0 +1,172 @@
+h1 {
+  color: #0690A3;
+  font-size: 2rem !important;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+h2 {
+  color: #0690A3;
+  font-size: 1.2rem !important;
+  margin-left: 10px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.date {
+  padding: 20px;
+}
+
+.activity {
+  padding: 20px;
+}
+
+.map {
+  padding: 20px;
+}
+
+ion-avatar {
+  --border-radius: 4px;
+}
+
+.example-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+:root {
+  --ion-color-primary: #0690A3;
+  --ion-color-primary-rgb: 0, 102, 0;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #F0EBD9;
+  --ion-color-primary-tint: #F0EBD9;
+}
+
+
+/* Run/Paddle slider */
+
+ion-segment-button::part(indicator-background) {
+  background: #0690A3;
+  box-shadow: inset 3px 4px 5px #014b5b;
+}
+
+/* Material Design styles */
+ion-segment-button.md::part(native) {
+  color: #F0EBD9;
+}
+
+.segment-button-checked.md::part(native) {
+  color: #0690A3;
+}
+
+ion-segment-button.md::part(indicator-background) {
+  height: 6px;
+}
+
+/* iOS styles */
+ion-segment-button.ios::part(native) {
+  color: #0690A3;
+}
+
+.segment-button-checked.ios::part(native) {
+  color: #F0EBD9;
+}
+
+ion-segment-button.ios::part(indicator-background) {
+  border-radius: 20px;
+}
+
+/* toggles on the settings page */
+
+.title-box {
+  outline: #014b5b;
+  height: 60px;
+  background-color: #F0EBD9;
+  box-shadow: inset 3px 4px 5px #808080;
+  border-radius: 50px;
+  margin-top: 20px;
+  padding: 5px;
+  align-items: center;
+}
+
+
+.star {
+  background-color: #0690A3;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px; 
+  color: #ffffff;
+  padding: 5px;
+}
+
+ion-avatar {
+  --border-radius: 4px;
+  height: 25% !important;
+  width: 25% !important;
+  margin-bottom: 20px;
+}
+
+  /* Map */
+  
+  #map {
+    height: 500px;
+    width: 100%;
+  }
+  
+  
+  #toolbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .preferences {
+    font-weight: bold !important;
+    font-size: 14pt;
+    font-family: Arial, Helvetica, sans-serif;
+    Padding: 20px;
+  }
+
+  #segment {
+height: 20px
+  }
+
+    table tbody tr td:nth-child(3),
+    table tbody tr td:nth-child(5),
+    table tbody tr td:nth-child(7),
+    table tbody tr td:nth-child(6) {
+      text-align: center;
+    }
+
+
+    table thead th {
+      font-size: 10px;
+      padding: 10px;
+    }
+
+    table tbody td {
+      font-size: 9px;
+      padding: 10px;
+
+    }
+
+    #route-list-table {
+      margin-top: 20px;
+    }
+
+    #route-list-table {
+      display: flex;
+      flex-wrap: wrap; 
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    
+    
+    
+    

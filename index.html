@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <script src="map.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="weather.js" defer></script>
+    <script src="profile.js" defer></script>
+
+
+
+</head>
+
+<body>
+
+    <ion-app>
+
+        <ion-tabs id="tb-nav">
+
+            <ion-tab tab="home">
+                <ion-header>
+                    <ion-toolbar class="toolbar" color="primary">
+                        <ion-title>WORK-OUT-LOOK</ion-title>
+                        <ion-toolbar-content id="temperature" style="margin-left: 10px;"></ion-toolbar-content><br>
+                        <ion-toolbar-content id="description" style="margin-left: 10px;"></ion-toolbar-content>
+                        <img id="icon" slot="end" src="" alt="">
+                    </ion-toolbar>
+                </ion-header>
+
+                <ion-content>
+                    <ion-card>
+                        <ion-card-content>
+
+                            <h1 class="page-title">Planning</h1>
+                            <p>Work-out-look is an activity planning app where you can plan your
+                                workouts according to the weather. When you have selected the date and
+                                time that you would like to run or paddle, select a route and the app will
+                                show you the weather forecast for that location.
+                            </p>
+                            <h2>Select an activity from below:</h2>
+                            <!-- the two images -->
+                            <ion-row>
+                                <ion-col class="ion-align-self-end">
+                                    <ion-img src="./Images/Run.jpeg"></ion-img>
+                                </ion-col>
+                                <ion-col class="ion-align-self-start">
+                                    <ion-img src="./Images/Paddle.jpeg"></ion-img>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2>Select a date and time:</h2>
+                            <ion-item>
+                                <ion-label for="date">Pick a date:</ion-label>
+                                <ion-input type="date" id="date"></ion-input>
+                                <ion-label for="time">Pick a time:</ion-label>
+                                <ion-input type="time" id="time"></ion-input>
+                                <ion-button onclick="displayDateTime()">Submit</ion-button>
+                            </ion-item>
+                            <ion-item>
+                                <p id="result"></p>
+                            </ion-item>
+
+                            <h2>Plan your route:</h2>
+
+                            <div id="map"></div>
+
+                            <ion-item>
+                                <h2>Your Work-Out-Look</h2>
+                                <span id="weather"></span>
+                            </ion-item>
+
+                            <ion-item>Total Distance:&nbsp;<span id="distance">0.00</span>&nbsp;km</ion-item>
+
+                            <ion-item>
+                                <ion-label for="route-name">Route name:</ion-label>
+                                <ion-input type="text" id="route-name"></ion-input>
+                                <ion-button onclick="clearRoute()">Clear Route</ion-button>
+                            </ion-item>
+
+
+                            <ion-button expand="block" onclick="saveRoute()">+ Add to Plan</ion-button>
+
+
+                            <script async
+                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV1DfvaQczVj43_srRMHyZaxClqJRApU0&callback=initMap"
+                                async defer>
+                                </script>
+
+                        </ion-card-content>
+
+                        <ion-label id="lbl-home"></ion-label>
+                    </ion-card>
+
+                </ion-content>
+            </ion-tab>
+
+            <!--CONTENT FOR SETTINGS PAGE -->
+
+            <ion-tab tab="settings">
+                <ion-header>
+                    <ion-toolbar class="toolbar" color="primary">
+                        <ion-title>WORK-OUT-LOOK</ion-title>
+                        <ion-toolbar-content id="temperature" style="margin-left: 10px;"></ion-toolbar-content><br>
+                        <ion-toolbar-content id="description" style="margin-left: 10px;"></ion-toolbar-content>
+                        <img id="icon" slot="end" src="" alt="">
+                    </ion-toolbar>
+
+                </ion-header>
+
+                <ion-content>
+                    <ion-card>
+                        <ion-card-content>
+                            <h1 class="page-title">Settings</h1>
+
+                            <ion-segment color="primary" value="primary">
+                                <ion-segment-button value="primary">
+                                    <ion-label>Running</ion-label>
+                                </ion-segment-button>
+                                <ion-segment-button value="segment">
+                                    <ion-label>Paddling</ion-segment-button>
+                                </ion-segment-button>
+                            </ion-segment>
+
+                            <ion-grid>
+                                <ion-row class="title-box">
+                                    <ion-col size="10">
+                                        <ion-label class="preferences">Location</ion-label>
+                                    </ion-col>
+                                    <ion-col size="2">
+                                        <ion-icon class="star" name="location-outline"></ion-icon>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                            <p style="margin-top: 10px;">Enter your main location.</p>
+
+                            <ion-item>
+                                <ion-label for="city-input">City:</ion-label>
+                                <ion-input type="text" id="city-input" name="city" value="">
+                            </ion-item>
+
+
+                            <ion-row class="title-box">
+                                <ion-col size="10">
+                                    <ion-label class="preferences">Units</ion-label>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-icon class="star" name="help-circle-outline"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+
+
+                            <ion-item>
+                                <ion-label for="units-input">Distance:</ion-label>
+                                <select id="distance-unit">
+                                    <option value="km">Kilometers (km)</option>
+                                    <option value="mi">Miles (mi)</option>
+                                </select>
+                            </ion-item>
+
+                            <ion-item>
+                                <ion-label for="units-input">Temperature:</ion-label>
+                                <select id="units-input" name="units">
+                                    <option value="metric">Celsius</option>
+                                    <option value="imperial">Fahrenheit</option>
+                                </select>
+                            </ion-item>
+
+                            <ion-row class="title-box">
+                                <ion-col size="10">
+                                    <ion-label class="preferences">Temperature</ion-label>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-icon class="star" name="thermometer-outline"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+
+                            <p style="margin-top: 10px;">Enter the minimum and maximum temperature conditions that you
+                                prefer to run in.</p>
+
+                            <ion-item>
+                                <ion-label for="threshold-input">Min Temperature</ion-label>
+                                <ion-input type="number" id="minimum-temperature-input" slot="end" name="threshold"
+                                    value="">
+                            </ion-item>
+                            <ion-item>
+                                <ion-label for="threshold-input">Max Temperature</ion-label>
+                                <ion-input type="number" id="threshold-input" slot="end" name="threshold" value="">
+                            </ion-item>
+
+                            <ion-button id="saveButton" class="buttons" expand="block" color="primary">+ Save
+                                Changes</ion-button>
+
+                            <!-- <ion-row class="title-box">
+                                  <ion-col size="10">
+                                    <ion-label class="preferences">Wind Speed</ion-label>
+                                  </ion-col>
+                                  <ion-col size="2">
+                                    <ion-icon class="star" slot="end" name="help-circle-outline"></ion-icon>
+                                  </ion-col>
+                                </ion-row> -->
+
+                        </ion-card-content>
+
+                    </ion-card>
+                    <ion-label id="lbl-settings"></ion-label>
+                </ion-content>
+            </ion-tab>
+
+            <!--CONTENT FOR SETTINGS PAGE ENDS-->
+
+
+            <!--CONTENT FOR PROFILE PAGE-->
+
+            <ion-tab tab="profile">
+                <ion-header>
+                    <ion-toolbar class="toolbar" color="primary">
+                        <ion-title>WORK-OUT-LOOK</ion-title>
+                        <ion-toolbar-content id="temperature" style="margin-left: 10px;"></ion-toolbar-content><br>
+                        <ion-toolbar-content id="description" style="margin-left: 10px;"></ion-toolbar-content>
+                        <img id="icon" slot="end" src="" alt="">
+                    </ion-toolbar>
+                </ion-header>
+
+                <ion-content fullscreen>
+
+                    <ion-card>
+                        <ion-label id="lbl-profile"></ion-label>
+                        <h1>Profile</h1>
+                        <ion-card-content>
+                            <ion-row>
+                                <img id="profile-picture" height="100vh" alt="Profile picture" src="./Images/Me.JPG"
+                                    style="margin-right: 40px;" />
+                                <input type="file" accept="image/*" id="profile-picture-input" style="display:none" />
+                                <ion-button onclick="document.getElementById('profile-picture-input').click()">Upload
+                                    Picture</ion-button>
+                            </ion-row>
+
+                            <ion-item>
+                                <ion-label>Name</ion-label>
+                                <ion-input id="name-input" placeholder="Name"></ion-input>
+                            </ion-item>
+
+                            <ion-item>
+                                <ion-label>Email</ion-label>
+                                <ion-input id="email-input" placeholder="Email"></ion-input>
+                            </ion-item>
+
+                            <ion-item>
+                                <ion-label>Username</ion-label>
+                                <ion-input id="user-input" placeholder="Username"></ion-input>
+                            </ion-item>
+
+                            <ion-button id="profile-btn" class="buttons" expand="block" color="primary">+ Save
+                                Changes</ion-button>
+
+                            <ion-row class="title-box">
+                                <ion-col size="10">
+                                    <ion-label class="preferences">Achievements</ion-label>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-icon class="star" name="star-outline"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-content>
+            </ion-tab>
+
+            <!--CONTENT FOR PROFILE PAGE ENDS-->
+
+
+            <!--CONTENT FOR PLAN PAGE-->
+
+            <ion-tab tab="planner">
+                <ion-header>
+                    <ion-toolbar class="toolbar" color="primary">
+                        <ion-title>WORK-OUT-LOOK</ion-title>
+                        <ion-toolbar-content id="temperature" style="margin-left: 10px;"></ion-toolbar-content><br>
+                        <ion-toolbar-content id="description" style="margin-left: 10px;"></ion-toolbar-content>
+                        <img id="icon" slot="end" src="" alt="">
+                    </ion-toolbar>
+                </ion-header>
+
+                <ion-content>
+                    <ion-card>
+                        <ion-card-content>
+                            <h1>Activity Plan</h1>
+                            <div id="routes"></div>
+                            <script src="runningplan.js"></script>
+
+                            <ion-img src="./Images/Run.jpeg"></ion-img>
+
+                            <p style="margin-top: 15px;">Here is your planned runs, tick them off as you complete them
+                                and select how they made you feel, if you substituted your run for
+                                an indoor activity instead, you can select that too. </p>
+
+                            <table id="route-list-table">
+                                <thead>
+                                    <tr>
+                                        <th>Route</th>
+                                        <th>Date/Time</th>
+                                        <th>Distance (km)</th>
+                                        <th>Weather</th>
+                                        <th>Completed</th>
+                                        <th>Feelings?</th>
+                                        <th>Substituted</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="route-list"></tbody>
+                            </table>
+                        </ion-card-content>
+                    </ion-card>
+                    <ion-label id="lbl-planner"></ion-label>
+                </ion-content>
+            </ion-tab>
+
+            <!--CONTENT FOR PLAN PAGE ENDS-->
+
+            <!-- NAV BAR -->
+
+            <ion-tab-bar color="primary" slot="bottom">
+                <ion-tab-button tab="home">
+                    <ion-icon name="home-outline" aria-hidden="true"></ion-icon>
+                    <ion-label>Home</ion-label>
+                </ion-tab-button>
+                <ion-tab-button tab="planner">
+                    <ion-icon name="fitness-outline" aria-hidden="true"></ion-icon>
+                    <ion-label>Plan</ion-label>
+                </ion-tab-button>
+                <ion-tab-button tab="profile">
+                    <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+                    <ion-label>Profile</ion-label>
+                </ion-tab-button>
+                <ion-tab-button tab="settings">
+                    <ion-icon name="settings-outline" aria-hidden="true"></ion-icon>
+                    <ion-label>Settings</ion-label>
+                </ion-tab-button>
+            </ion-tab-bar>
+
+        </ion-tabs>
+
+    </ion-app>
+
+</body>
+
+</html>
