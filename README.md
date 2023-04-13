@@ -26,3 +26,5 @@ Settings Screen Function
 * Add in a location and see the weather change on the header
 * Add in different units to each section
 * Save all inputed data
+
+VIDEO LINK - 0408139 J Wallace - Mobile App Development.mp4
