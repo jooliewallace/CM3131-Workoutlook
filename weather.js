@@ -23,6 +23,7 @@ const cityInput = document.getElementById("city-input");
 const unitsInput = document.getElementById("units-input");
 const minimumTemperatureInput = document.getElementById("minimum-temperature-input");
 const thresholdInput = document.getElementById("threshold-input");
+const thresholdInput1 = document.getElementById("threshold-input1");
 const saveButton = document.querySelector('#saveButton');
 const clearButton = document.querySelector('#clearRouteButton');
 
@@ -31,7 +32,8 @@ window.addEventListener("load", function() {
   cityInput.value = localStorage.getItem('city') || 'London';
   unitsInput.value = localStorage.getItem('units') || 'metric';
   minimumTemperatureInput.value = localStorage.getItem('minimumTemperature') || 0;
-  thresholdInput.value = localStorage.getItem('notificationThreshold') || 5;
+  thresholdInput.value = localStorage.getItem('notificationThreshold') || 0;
+
 
   // Update the city and units with the saved values
   city = cityInput.value;
@@ -118,17 +120,17 @@ function fetchWeatherData() {
         if (Notification.permission === "granted") {
           const notification = new Notification(`Temperature Alert: ${currentTemperature}°C`, {
             body: `The temperature in ${city} has dropped below ${minimumTemperature}°C.`,
-            icon: "path/to/icon.png" // icon
+            // icon: "path/to/icon.png" // icon
           });
 
           console.log(`Temperature drop alert notification shown for ${city}.`);
 
-        } else {
+        } else if (Notification.permission !== "denied") {
           Notification.requestPermission().then(permission => {
             if (permission === "granted") {
               const notification = new Notification(`Temperature Alert: ${currentTemperature}°C`, {
                 body: `The temperature in ${city} has dropped below ${minimumTemperature}°C.`,
-                icon: "path/to/icon.png" // icon
+                // icon: "path/to/icon.png" // icon
               });
 
               console.log(`Temperature drop alert notification shown for ${city}.`);
@@ -139,6 +141,35 @@ function fetchWeatherData() {
           });
         }
       }
+
+
+            // Check if the temperature is below the threshold and show a notification if it is
+            if (currentTemperature > thresholdInput1) {
+              if (Notification.permission === "granted") {
+                const notification = new Notification(`Temperature Alert: ${currentTemperature}°C`, {
+                  body: `The temperature in ${city} has risen above ${thresholdInput1}°C.`,
+                  // icon: "path/to/icon.png" // icon
+                });
+      
+                console.log(`Temperature rise alert notification shown for ${city}.`);
+      
+              } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                  if (permission === "granted") {
+                    const notification = new Notification(`Temperature Alert: ${currentTemperature}°C`, {
+                      body: `The temperature in ${city} has risen above ${thresholdInput1}°C.`,
+                      // icon: "path/to/icon.png" // icon
+                    });
+      
+                    console.log(`Temperature rise alert notification shown for ${city}.`);
+      
+                  } else {
+                    console.log("User denied permission for notifications.");
+                  }
+                });
+              }
+            }
+      
     })
     
     .catch(error => {
