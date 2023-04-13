@@ -27,4 +27,4 @@ Settings Screen Function
 * Add in different units to each section
 * Save all inputed data
 
-VIDEO LINK - (0408139 J Wallace - Mobile App Development.mp4)
+VIDEO LINK - 0408139 J Wallace - Mobile App Development.mp4
